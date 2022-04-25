@@ -6,6 +6,13 @@ const app = express();
 const morgan = require('morgan')
 const fs = require('fs')
 
+
+//Requiring database file & make express use parser
+const db = require("./log.db")
+app.use(express.urlendcoded({ extended: true }));
+app.use(express.json());
+
+
 //Starting app server
 
 let port = 0;
@@ -57,9 +64,10 @@ let logging = morgan('combined')
 ))*/
 
 
-//defining check endpoint
-app.get('/app', (req,res) => {
-    res.status(200).end('200 OK')
+//read at root
+app.get('/app/', (req,res,next) => {
+    res.json({"message": "API working (200)"});
+    res.status(200);
 })
 
 
