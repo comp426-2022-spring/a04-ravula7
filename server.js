@@ -8,7 +8,7 @@ const fs = require('fs')
 
 
 //Requiring database file & make express use parser
-const db = require('log')
+const db = require('./log.js')
 //const logdb = require("./log.db.js")
 /*const db = require("./log.db")
 app.use(express.urlendcoded({ extended: true }));
