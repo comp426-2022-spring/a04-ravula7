@@ -91,6 +91,13 @@ app.use("/app/new/user",(req,res,next) =>{
 if(args.debug == true){
   //access log response
 app.get("/app/log/access",(req,res) =>{
+  try{
+    const statement2 = db.prepare('SELECT * FROM userinfo').all()
+    res.status(200).json(statement2)
+  }
+  catch{
+    console.error(e)
+  }
   
 })
 
