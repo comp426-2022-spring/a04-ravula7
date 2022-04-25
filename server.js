@@ -9,11 +9,8 @@ const fs = require('fs')
 
 //Requiring database file & make express use parser
 const db = require('./log.js')
-//const logdb = require("./log.db.js")
-/*const db = require("./log.db")
-app.use(express.urlendcoded({ extended: true }));
-app.use(express.json());*/
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //Starting app server
 
@@ -72,8 +69,8 @@ app.get('/app/', (req,res,next) => {
 })
 
 
-
-app.post('/app/new/user',(req,res,next) =>{
+//middleware
+app.use("/app/new/user",(req,res,next) =>{
   let logdata = {
     remoteaddr: req.ip,
     remoteuser: req.user,
@@ -91,8 +88,17 @@ app.post('/app/new/user',(req,res,next) =>{
   res.status(200).json(info)
 })
 
+if(args.debug == true){
+  //access log response
+app.get("/app/log/access",(req,res) =>{
+  
+})
 
-
+//error response
+app.get("/app/error",(req,res) =>{
+  throw new Error('BROKEN')
+})
+}
 
 
 //defining check endpoint
