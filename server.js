@@ -64,6 +64,11 @@ let logging = morgan('combined')
 ))*/
 
 
+app.get('/app/', (req,res,next) => {
+  res.json({"message": "API working (200)"});
+  res.status(200);
+})
+
 //defining check endpoint
 app.get('/app', (req,res) => {
     res.status(200).end('200 OK')
