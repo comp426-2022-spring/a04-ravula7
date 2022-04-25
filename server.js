@@ -89,6 +89,7 @@ app.use("/app/new/user",(req,res,next) =>{
 })
 
 if(args.debug == true){
+
   //access log response
 app.get("/app/log/access",(req,res) =>{
     const statement2 = db.prepare('SELECT * FROM accesslog').all()
@@ -100,6 +101,12 @@ app.get("/app/error",(req,res) =>{
   throw new Error('BROKEN')
 })
 }
+
+//create an access log file
+if(args.log == true){
+  const writestream = fs.createWriteStream('access.log', {flags: 'a'})
+  app.use(morgan('combined', {stream: writestream}))
+} 
 
 
 //defining check endpoint
