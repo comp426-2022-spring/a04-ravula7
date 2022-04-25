@@ -8,9 +8,9 @@ const fs = require('fs')
 
 
 //Requiring database file & make express use parser
-const db = require("./log.db")
+/*const db = require("./log.db")
 app.use(express.urlendcoded({ extended: true }));
-app.use(express.json());
+app.use(express.json());*/
 
 
 //Starting app server
@@ -68,6 +68,8 @@ app.get('/app/', (req,res,next) => {
   res.json({"message": "API working (200)"});
   res.status(200);
 })
+
+
 
 /*app.post('/app/new/user',(req,res,next) =>{
   let logdata = {
