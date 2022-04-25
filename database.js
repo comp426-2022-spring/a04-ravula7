@@ -16,12 +16,11 @@ if(row === undefined){
             protocol VARCHAR,
             http_version NUMERIC, 
             status INTEGER, 
-            content-length NUMERIC,
             referer VARCHAR,
             user_agent VARCHAR
             );
     `
-#id INTEGER PRIMARY KEY, date VARCHAR, referrer_url VARCHAR,
+
         logdb.exec(sqlInit)
 }
 else{

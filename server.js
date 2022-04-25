@@ -12,8 +12,30 @@ let port = 0;
 const args = require('minimist')(process.argv.slice(2)); //slice arguments for port number where args is an array
 port = args['port'] //0
 
+const help = (`
+server.js [options]
+
+  --por		Set the port number for the server to listen on. Must be an integer
+              	between 1 and 65535.
+
+  --debug	If set to true, creates endlpoints /app/log/access/ which returns
+              	a JSON access log from the database and /app/error which throws 
+              	an error with the message "Error test successful." Defaults to 
+		false.
+
+  --log		If set to false, no log files are written. Defaults to true.
+		Logs are always written to database.
+
+  --help	Return this message and exit.
+`)
+
+if(args.help || args.h){
+  console.log(help)
+  process.exit(0)
+}
+
 if(port == undefined){
-  port = 5000;
+  port = 5000; //5555?
 }
 
 const server = app.listen(port, () => {
