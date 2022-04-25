@@ -70,7 +70,7 @@ app.get('/app/', (req,res,next) => {
 
 
 //middleware
-app.use("/app/new/user",(req,res,next) =>{
+app.get("/app/new/user",(req,res,next) =>{
   let logdata = {
     remoteaddr: req.ip,
     remoteuser: req.user,
@@ -83,15 +83,16 @@ app.use("/app/new/user",(req,res,next) =>{
     referer: req.headers['referer'],
     useragent: req.headers['user-agent']
   }
-  const statement = db.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?,?,?,?,?,?,?,?,?,?)')
+  const statement = db.prepare('INSERT INTO accesslog (remote_addr, remote_user, time, method, url, protocol, http_version, status, referer, user_agent) VALUES (?,?,?,?,?,?,?,?,?,?)')
   const info = statement.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)
-  res.status(200).json(info)
+  res.status(200).json(info) 
+  next();
 })
 
 if(args.debug == true){
 
   //access log response
-app.get("/app/log/access",(req,res) =>{
+app.get("/app/log/access",(req,res) => {
     const statement2 = db.prepare('SELECT * FROM accesslog').all()
     res.status(200).json(statement2)
 })
