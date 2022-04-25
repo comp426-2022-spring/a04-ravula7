@@ -10,7 +10,7 @@ if(row === undefined){
         CREATE TABLE accesslog ( remote-addr VARCHAR, remote-user VARCHAR, time VARCHAR, method VARCHAR, url VARCHAR, protocol VARCHAR, http-version NUMERIC, status INTEGER, referer VARCHAR, useragent VARCHAR );
     `;
         logdb.exec(sqlInit)
-        console.log('Your database has been initialized')
+        console.log('Your database has now been initialized')
 }
 else{
     console.log('Database already exists')
